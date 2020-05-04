@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">R1-Application</string>
-    <string name="welcomeText">Bienvenue\nEtre ton nom stp :</string>
+    <string name="welcomeText">Bienvenue\nEntre ton nom stp :</string>
     <string name="goButtonText">Let\'s go...</string>
     <string name="userNameEditText">Ici</string>
 </resources>
