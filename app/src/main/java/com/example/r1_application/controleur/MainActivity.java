@@ -11,11 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.r1_application.R;
+import com.example.r1_application.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText userNameEditText;
     private Button firstPageGoButton;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         firstPageGoButton = findViewById ( R.id.firstPageGoButton );
         userNameEditText = findViewById ( R.id.userNameEditText );
+        user = new User();
 
         firstPageGoButton.setEnabled ( false );
         userNameEditText.addTextChangedListener ( new TextWatcher () {
@@ -44,9 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         } );
+
         firstPageGoButton.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                String userName = userNameEditText.getText ().toString ();
+                user.setUserName ( userName );
                 Intent goToGameActivity = new Intent ( MainActivity.this, GameActivity.class);
                 startActivity ( goToGameActivity );
             }
