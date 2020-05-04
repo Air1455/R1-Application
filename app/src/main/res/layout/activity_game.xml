@@ -4,6 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controleur.GameActivity">
+    tools:context=".controleur.GameActivity"
+    android:background="@android:color/holo_orange_light">
+    <TextView
+        android:id="@+id/gameQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gameQuestion"
+        android:textSize="30sp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:gravity="center_horizontal"
+        android:padding="40dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/gameAnswer1"
+        android:background="@android:color/holo_blue_bright"/>
+    <Button
+        android:id="@+id/gameAnswer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gameAnswer1"
+        app:layout_constraintBottom_toTopOf="@+id/gameAnswer2"
+        android:padding="30dp"
+        android:textSize="30sp"/>
+    <Button
+        android:id="@+id/gameAnswer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gameAnswer2"
+        app:layout_constraintBottom_toTopOf="@+id/gameAnswer3"
+        android:padding="30dp"
+        android:textSize="30sp"/>
+    <Button
+        android:id="@+id/gameAnswer3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gameAnswer3"
+        app:layout_constraintBottom_toTopOf="@+id/gameAnswer4"
+        android:padding="30dp"
+        android:textSize="30sp"/>
+    <Button
+        android:id="@+id/gameAnswer4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gameAnswer4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="30dp"
+        android:textSize="30sp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

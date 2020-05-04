@@ -3,4 +3,9 @@
     <string name="welcomeText">Bienvenue\nEntre ton nom stp :</string>
     <string name="goButtonText">Let\'s go...</string>
     <string name="userNameEditText">Ici</string>
+    <string name="gameQuestion">Question ?</string>
+    <string name="gameAnswer1">Réponse 1</string>
+    <string name="gameAnswer2">Réponse 2</string>
+    <string name="gameAnswer3">Réponse 3</string>
+    <string name="gameAnswer4">Réponse 4</string>
 </resources>
