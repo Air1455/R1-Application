@@ -1,8 +1,10 @@
-package com.example.r1_application;
+package com.example.r1_application.controleur;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.r1_application.R;
 
 public class GameActivity extends AppCompatActivity {
 

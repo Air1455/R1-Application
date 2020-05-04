@@ -1,12 +1,16 @@
-package com.example.r1_application;
+package com.example.r1_application.controleur;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.r1_application.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        } );
+        firstPageGoButton.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent goToGameActivity = new Intent ( MainActivity.this, GameActivity.class);
+                startActivity ( goToGameActivity );
             }
         } );
     }
