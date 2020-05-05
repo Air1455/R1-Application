@@ -7,7 +7,7 @@ public class QuestionList {
     private List<Question> questionList;
     private int nextQuestionIndex;
 
-    public QuestionList(List<Question> questionList, int nextQuestionIndex) {
+    public QuestionList(List<Question> questionList) {
         this.questionList = questionList;
         Collections.shuffle(questionList);
         nextQuestionIndex = 0;
