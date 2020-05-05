@@ -3,8 +3,10 @@ package com.example.r1_application.controleur;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.r1_application.R;
 import com.example.r1_application.model.Question;
@@ -12,7 +14,17 @@ import com.example.r1_application.model.QuestionList;
 
 import java.util.Arrays;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener{
+    @Override
+    public void onClick(View v) {
+        int answerId = (int) v.getTag ();
+        if(answerId == currentQuestion.getChoiceId ()){
+            Toast.makeText (this, "Correct", Toast.LENGTH_SHORT).show ();
+        } else{
+            Toast.makeText (this, "Wrong answer", Toast.LENGTH_SHORT).show ();
+        }
+    }
+
     private TextView gameQuestion;
     private Button gameAnswer1;
     private Button gameAnswer2;
@@ -40,6 +52,11 @@ public class GameActivity extends AppCompatActivity {
         gameAnswer2.setTag ( 1 );
         gameAnswer3.setTag ( 2 );
         gameAnswer4.setTag ( 3 );
+
+        gameAnswer1.setOnClickListener ( this );
+        gameAnswer2.setOnClickListener ( this );
+        gameAnswer3.setOnClickListener ( this );
+        gameAnswer4.setOnClickListener ( this );
 
         currentQuestion = questionList.getQuestion ();
         this.displayQuestion(currentQuestion);
