@@ -1,8 +1,14 @@
 package com.example.r1_application.controleur;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,9 +26,46 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int answerId = (int) v.getTag ();
         if(answerId == currentQuestion.getChoiceId ()){
             Toast.makeText (this, "Correct", Toast.LENGTH_SHORT).show ();
+            score++;
         } else{
             Toast.makeText (this, "Wrong answer", Toast.LENGTH_SHORT).show ();
         }
+        enableTouchEvents = false;
+
+        new Handler ().postDelayed ( new Runnable () {
+            @Override
+            public void run() {
+                enableTouchEvents = true;
+                if(--numberOfQuestion == 0){
+                    endGame();
+                } else{
+                    currentQuestion = questionList.getQuestion ();
+                    displayQuestion ( currentQuestion );
+                }
+            }
+        }, 2000 );
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return enableTouchEvents && super.dispatchTouchEvent ( ev );
+    }
+
+    private void endGame() {
+        AlertDialog.Builder builder = new AlertDialog.Builder ( this );
+        builder.setTitle ( "Well done! " )
+                .setMessage ( "Your score is " + score )
+                .setPositiveButton ( "OK", new DialogInterface.OnClickListener () {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent ();
+                        intent.putExtra ( BUNDLE_EXTRA_SCORE, score );
+                        setResult ( RESULT_OK, intent );
+                        finish ();
+                    }
+                } )
+                .create ()
+                .show ();
     }
 
     private TextView gameQuestion;
@@ -34,6 +77,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Question currentQuestion;
     private QuestionList questionList;
 
+    private int score;
+    private int numberOfQuestion;
+
+    public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE";
+    public static final String BUNDLE_STATE_SCORE = "BUNDLE_STATE_SCORE";
+    public static final String BUNDLE_STATE_QUESTION = "BUNDLE_EXTRA_QUESTION";
+    private boolean enableTouchEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +91,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView ( R.layout.activity_game );
 
         questionList = this.generateQuestions ();
+
+        if(savedInstanceState != null){
+            score = savedInstanceState.getInt ( BUNDLE_STATE_SCORE );
+            numberOfQuestion = savedInstanceState.getInt ( BUNDLE_STATE_QUESTION );
+        } else{
+            score = 0;
+            numberOfQuestion = 4;
+        }
 
         gameQuestion = findViewById ( R.id.gameQuestion );
         gameAnswer1 = findViewById ( R.id.gameAnswer1 );
@@ -60,6 +118,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         currentQuestion = questionList.getQuestion ();
         this.displayQuestion(currentQuestion);
+
+        enableTouchEvents = true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt ( BUNDLE_STATE_SCORE, score );
+        outState.putInt ( BUNDLE_STATE_QUESTION, numberOfQuestion );
+        super.onSaveInstanceState ( outState );
     }
 
     private void displayQuestion(final Question currentQuestion) {
